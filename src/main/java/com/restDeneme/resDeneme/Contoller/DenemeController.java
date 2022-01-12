@@ -1,12 +1,20 @@
 package com.restDeneme.resDeneme.Contoller;
 
+import com.github.javafaker.Country;
 import com.github.javafaker.Faker;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.restDeneme.resDeneme.model.Exception;
 import com.restDeneme.resDeneme.model.IL;
 import com.restDeneme.resDeneme.model.Kurum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.*;
 
 @RestController
@@ -75,6 +83,54 @@ public class DenemeController {
         return new ResponseEntity<>(kurumList, HttpStatus.CREATED);
     }
 
+
+    @GetMapping("/hataList")
+    public ResponseEntity<List<Exception>> getHataList() {
+        List<Exception> hataList = new ArrayList<>();
+        Faker faker = new Faker(new Locale("tr-TR"));
+
+        hataList.clear();
+        for (int i = 0; i < 10; i++) {
+            generateHata(hataList, faker);
+        }
+
+
+        return new ResponseEntity<>(hataList, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/hata")
+    public ResponseEntity<List<Exception>> getHata() {
+        List<Exception> hataList = new ArrayList<>();
+        Faker faker = new Faker(new Locale("tr-TR"));
+
+
+        generateHata(hataList, faker);
+        return new ResponseEntity<>(hataList, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/dummyveri/{sayi}")
+    public ResponseEntity<List<Kurum>> getDummy(@PathVariable Long sayi) {
+        List<Kurum> kurumList = new ArrayList<>();
+        Faker faker = new Faker(new Locale("tr-TR"));
+
+
+        for (int i = 0; i < sayi; i++) {
+            generateKurum(kurumList, faker);
+
+
+        }
+        Gson gson;
+        try (Writer writer = new FileWriter("Output.json")) {
+            gson = new GsonBuilder().create();
+            gson.toJson(kurumList, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(kurumList, HttpStatus.CREATED);
+    }
+
     private void generateKurum(List<Kurum> kurumList, Faker faker) {
         Kurum kurum = new Kurum();
         kurum.setKurumAdi(faker.company().name());
@@ -82,5 +138,30 @@ public class DenemeController {
         kurum.setLogo(faker.company().logo());
         kurum.setOwner(faker.company().catchPhrase());
         kurumList.add(kurum);
+
+
+        Gson gson = new Gson();
+        try (Reader reader = new FileReader("package.json")) {
+
+            // Convert JSON File to Java Object
+            Type listType = new TypeToken<List<String>>() {}.getType();
+            List<String> staff = gson.fromJson(reader,listType);
+
+            // print staff
+            System.out.println(staff.get(0));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void generateHata(List<Exception> hataList, Faker faker) {
+        Exception hata = new Exception();
+        hata.setId(faker.number().randomNumber());
+        hata.setDate(faker.date().birthday());
+
+
+        hataList.add(hata);
     }
 }
