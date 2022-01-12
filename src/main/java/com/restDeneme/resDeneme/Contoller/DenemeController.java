@@ -89,7 +89,7 @@ public class DenemeController {
 
         hataList.clear();
         for (int i = 0; i < 10; i++) {
-            generateHata(hataList, faker);
+            generateHata(hataList, faker, 10);
         }
 
 
@@ -102,7 +102,7 @@ public class DenemeController {
         Faker faker = new Faker(new Locale("tr-TR"));
 
 
-        generateHata(hataList, faker);
+        generateHata(hataList, faker, 10);
         return new ResponseEntity<>(hataList, HttpStatus.CREATED);
     }
 
@@ -111,7 +111,7 @@ public class DenemeController {
     public ResponseEntity<List<Kurum>> getDummy(@PathVariable Long sayi) {
         List<Kurum> kurumList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
-owner();
+
 
         for (int i = 0; i < sayi; i++) {
             generateKurum(kurumList, faker);
@@ -138,43 +138,51 @@ owner();
         kurumList.add(kurum);
 
 
-
     }
 
 
-    private void generateHata(List<Exception> hataList, Faker faker) {
-        Exception hata = new Exception();
-        hata.setId(faker.number().randomNumber());
-        hata.setDate(faker.date().birthday());
-        hata.setIp(faker.number().digit());
-        hata.setKullaniciId(faker.number().digit());
-        hata.setPort(faker.number().randomNumber());
-        hata.setVersiyon(faker.number().digit());
-        hata.setOwner(owner().toString());
+    private void generateHata(List<Exception> hataList, Faker faker, int count) {
 
 
+        for (int i = 0; i < count; i++) {
 
-        hataList.add(hata);
+            for(int j=0;j<50;j++)
+            {
+                Exception hata = new Exception();
+                hata.setId(faker.number().randomNumber());
+                hata.setDate(faker.date().birthday());
+                hata.setIp(faker.number().digit());
+                hata.setKullaniciId(faker.number().digit());
+                hata.setPort(faker.number().randomNumber());
+                hata.setVersiyon(faker.number().digit());
+                hata.setOwner(getOwner(count).toString());
+
+
+                hataList.add(hata);
+
+            }
+
+
+        getOwner(i);
+
+        }
+
+
     }
 
-    public List<String> owner()
-    {
+    public List<String> getOwner(int index) {
         Gson gson = new Gson();
-        List<String> yeni=new ArrayList<>() ;
-        try (Reader reader = new FileReader("package.json")) {
+        try (Reader reader = new FileReader("ownerList.json")) {
 
             // Convert JSON File to Java Object
-            Type listType = new TypeToken<List<String>>() {}.getType();
-            List<String> staff = gson.fromJson(reader,listType);
-
-            // print staff
-            yeni.add(staff.get(0));
-            System.out.println(staff.get(0));
-
+            Type listType = new TypeToken<List<String>>() {
+            }.getType();
+            List<String> staffList = gson.fromJson(reader, listType);
+            return staffList.get(index);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return yeni;
+
     }
 }
