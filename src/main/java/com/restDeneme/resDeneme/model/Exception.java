@@ -16,7 +16,7 @@ public Exception()
 }
     private Long id;
     private Date date;
-    private Long kurumId;
+    private String owner;
     private String versiyon;
     private String ip;
     private Long port;
