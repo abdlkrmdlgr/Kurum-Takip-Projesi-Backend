@@ -30,7 +30,6 @@ public class DenemeController {
         return new ResponseEntity<>(kurumList2, HttpStatus.CREATED);
     }
 
-
     @GetMapping("/kurumList")
     public ResponseEntity<List<Kurum>> getKurumList() {
         List<Kurum> kurumList = new ArrayList<>();
@@ -40,12 +39,9 @@ public class DenemeController {
         for (int i = 0; i < 10; i++) {
             generateKurum(kurumList, faker);
 
-
         }
-
         return new ResponseEntity<>(kurumList, HttpStatus.CREATED);
     }
-
 
     @GetMapping("/hataList")
     public ResponseEntity<List<ExceptionLog>> getHataList() {
@@ -56,7 +52,6 @@ public class DenemeController {
         for (int i = 0; i < 10; i++) {
             generateHata(hataList, faker, 10);
         }
-
 
         return new ResponseEntity<>(hataList, HttpStatus.CREATED);
     }
@@ -71,16 +66,13 @@ public class DenemeController {
         return new ResponseEntity<>(hataList, HttpStatus.CREATED);
     }
 
-
     @PostMapping("/dummyveri/{sayi}")
     public ResponseEntity<List<Kurum>> getDummy(@PathVariable Long sayi) {
         List<Kurum> kurumList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
-
         for (int i = 0; i < sayi; i++) {
             generateKurum(kurumList, faker);
-
 
         }
         Gson gson;
@@ -99,10 +91,8 @@ public class DenemeController {
         List<ExceptionLog> hataList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
-
         for (int i = 0; i < sayi; i++) {
             generateHata(hataList, faker, sayi);
-
 
         }
         Gson gson;
@@ -122,41 +112,34 @@ public class DenemeController {
         if (sayi != 1)
             sayi = sayi + bodyCount.getCount();
 
-        List<ExceptionLog> exceptionLogList=   jsonReader();
-            List<ExceptionLog> arrlist = exceptionLogList.subList(sayi - 1, sayi + bodyCount.getCount() - 1);
-            return new ResponseEntity<>(arrlist, HttpStatus.OK);
-
-
-
+        List<ExceptionLog> exceptionLogList = jsonReader();
+        List<ExceptionLog> arrlist = exceptionLogList.subList(sayi - 1, sayi + bodyCount.getCount() - 1);
+        return new ResponseEntity<>(arrlist, HttpStatus.OK);
 
     }
 
     @GetMapping("exceptionHata/{sayi}")
     public ExceptionLog exceptionHata(@PathVariable int sayi) {
 
-     List<ExceptionLog> exceptionLogList=   jsonReader();
-            for (int i = 0; i < exceptionLogList.size(); i++)
-                if (exceptionLogList.get(i).getId() == sayi)
-                    return exceptionLogList.get(i);
+        List<ExceptionLog> exceptionLogList = jsonReader();
+        for (int i = 0; i < exceptionLogList.size(); i++)
+            if (exceptionLogList.get(i).getId() == sayi)
+                return exceptionLogList.get(i);
 
-
-return null;
+        return null;
     }
 
     @GetMapping("toplam")
-    public ResponseEntity<Integer> toplam()
-    {
+    public ResponseEntity<Integer> toplam() {
 
-        List<ExceptionLog> exceptionLogList= jsonReader();
+        List<ExceptionLog> exceptionLogList = jsonReader();
 
-        return new ResponseEntity<>(exceptionLogList.size(),HttpStatus.OK);
+        return new ResponseEntity<>(exceptionLogList.size(), HttpStatus.OK);
     }
 
-    public List<ExceptionLog> jsonReader()
-    {
+    public List<ExceptionLog> jsonReader() {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("exceptionList.json")) {
-
 
             // Convert JSON File to Java Object
             Type listType = new TypeToken<List<ExceptionLog>>() {
@@ -178,12 +161,10 @@ return null;
         kurum.setOwner(faker.company().catchPhrase());
         kurumList.add(kurum);
 
-
     }
 
 
     private void generateHata(List<ExceptionLog> hataList, Faker faker, int count) {
-
 
         for (int i = 0; i < count; i++) {
 
@@ -198,16 +179,11 @@ return null;
                 hata.setVersiyon(faker.number().digit());
                 hata.setOwner(owner);
 
-
                 hataList.add(hata);
 
             }
 
-
-            // getOwner(i);
-
         }
-
 
     }
 
