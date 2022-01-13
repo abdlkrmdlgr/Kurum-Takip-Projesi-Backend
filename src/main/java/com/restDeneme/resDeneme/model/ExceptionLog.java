@@ -7,10 +7,10 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class Exception {
+public class ExceptionLog {
 
 
-public Exception()
+public ExceptionLog()
 {
 
 }

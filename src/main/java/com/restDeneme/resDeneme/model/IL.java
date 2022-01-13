@@ -11,7 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class IL {
 
-    private Date createDate;
-    private String id;
-    private String name;
+    public Integer count;
+
 }

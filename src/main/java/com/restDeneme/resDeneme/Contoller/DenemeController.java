@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.restDeneme.resDeneme.model.Exception;
+import com.restDeneme.resDeneme.model.ExceptionLog;
 import com.restDeneme.resDeneme.model.IL;
 import com.restDeneme.resDeneme.model.Kurum;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,9 @@ import java.util.*;
 @RequestMapping("/mert")
 public class DenemeController {
 
-    private static final List<IL> iller = new ArrayList<>();
+    private static final List<IL> jsonint = new ArrayList<>();
 
-    public DenemeController() {
+   /* public DenemeController() {
         if (iller.isEmpty()) {
             IL il1 = new IL(new Date(), "06", "Ankara");
             IL il2 = new IL(new Date(), "34", "İstanbul");
@@ -55,7 +55,7 @@ public class DenemeController {
         return new ResponseEntity<>(newIL, HttpStatus.CREATED);
 
     }
-
+*/
     @GetMapping("/kurum")
     public ResponseEntity<List<Kurum>> getKurum() {
         List<Kurum> kurumList2 = new ArrayList<>();
@@ -83,8 +83,8 @@ public class DenemeController {
 
 
     @GetMapping("/hataList")
-    public ResponseEntity<List<Exception>> getHataList() {
-        List<Exception> hataList = new ArrayList<>();
+    public ResponseEntity<List<ExceptionLog>> getHataList() {
+        List<ExceptionLog> hataList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
         hataList.clear();
@@ -97,8 +97,8 @@ public class DenemeController {
     }
 
     @GetMapping("/hata")
-    public ResponseEntity<List<Exception>> getHata() {
-        List<Exception> hataList = new ArrayList<>();
+    public ResponseEntity<List<ExceptionLog>> getHata() {
+        List<ExceptionLog> hataList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
 
@@ -119,7 +119,7 @@ public class DenemeController {
 
         }
         Gson gson;
-        try (Writer writer = new FileWriter("Output.json")) {
+        try (Writer writer = new FileWriter("exceptionList.json")) {
             gson = new GsonBuilder().create();
             gson.toJson(kurumList, writer);
         } catch (IOException e) {
@@ -127,6 +127,49 @@ public class DenemeController {
         }
 
         return new ResponseEntity<>(kurumList, HttpStatus.CREATED);
+    }
+    @PostMapping("/dummyVeriHataList/{sayi}")
+    public void generateDummyHataList(@PathVariable int sayi) {
+        List<ExceptionLog> hataList = new ArrayList<>();
+        Faker faker = new Faker(new Locale("tr-TR"));
+
+
+        for (int i = 0; i < sayi; i++) {
+            generateHata(hataList, faker,sayi);
+
+
+        }
+        Gson gson;
+        try (Writer writer = new FileWriter("exceptionList.json")) {
+            gson = new GsonBuilder().create();
+            gson.toJson(hataList, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @ResponseBody
+            @GetMapping(value = "/exceptionList/{sayi}")
+    public ResponseEntity<List<ExceptionLog>> getExceptionList(@PathVariable ("sayi")int sayi,@RequestBody IL bodyCount)
+    {
+
+        Gson gson = new Gson();
+        try (Reader reader = new FileReader("exceptionList.json")) {
+int a=bodyCount.getCount();
+            // Convert JSON File to Java Object
+            Type listType = new TypeToken<List<ExceptionLog>>() {
+            }.getType();
+            List<ExceptionLog> exceptionLogList = gson.fromJson(reader, listType);
+            if(sayi!=1)
+                sayi=sayi+bodyCount.getCount();;
+            List<ExceptionLog> arrlist= exceptionLogList.subList(sayi-1,sayi+bodyCount.getCount()-1);
+            return new ResponseEntity<>(arrlist,HttpStatus.OK);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void generateKurum(List<Kurum> kurumList, Faker faker) {
@@ -141,21 +184,22 @@ public class DenemeController {
     }
 
 
-    private void generateHata(List<Exception> hataList, Faker faker, int count) {
+    private void generateHata(List<ExceptionLog> hataList, Faker faker, int count) {
 
 
         for (int i = 0; i < count; i++) {
 
-            for(int j=0;j<50;j++)
+            String owner=getOwner(i);
+            for(int j=0;j<20;j++)
             {
-                Exception hata = new Exception();
+                ExceptionLog hata = new ExceptionLog();
                 hata.setId(faker.number().randomNumber());
                 hata.setDate(faker.date().birthday());
                 hata.setIp(faker.number().digit());
                 hata.setKullaniciId(faker.number().digit());
                 hata.setPort(faker.number().randomNumber());
                 hata.setVersiyon(faker.number().digit());
-                hata.setOwner(getOwner(count).toString());
+                hata.setOwner(owner);
 
 
                 hataList.add(hata);
@@ -163,14 +207,14 @@ public class DenemeController {
             }
 
 
-        getOwner(i);
+       // getOwner(i);
 
         }
 
 
     }
 
-    public List<String> getOwner(int index) {
+    public String getOwner(int index) {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("ownerList.json")) {
 
@@ -183,6 +227,6 @@ public class DenemeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+return null;
     }
 }
