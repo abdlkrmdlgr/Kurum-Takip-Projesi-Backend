@@ -20,43 +20,7 @@ import java.util.*;
 @RequestMapping("/mert")
 public class DenemeController {
 
-    private static final List<IL> jsonint = new ArrayList<>();
 
-    /* public DenemeController() {
-         if (iller.isEmpty()) {
-             IL il1 = new IL(new Date(), "06", "Ankara");
-             IL il2 = new IL(new Date(), "34", "İstanbul");
-
-             iller.add(il1);
-             iller.add(il2);
-         }
-     }
-
-
-     @GetMapping
-     public ResponseEntity<List<IL>> getIller() {
-
-
-         return new ResponseEntity<>(iller, HttpStatus.OK);
-
-     }
-
-     @GetMapping("/{id}")
-     public ResponseEntity<IL> getIL(@PathVariable String id) {
-         IL result =
-                 iller.stream().filter(il -> il.getId().
-                         equals(id)).findFirst().orElseThrow(() -> new RuntimeException("Bulunamadı"));
-         return new ResponseEntity<>(result, HttpStatus.OK);
-     }
-
-     @PostMapping
-     public ResponseEntity<IL> createIL(@RequestBody IL newIL) {
-         newIL.setCreateDate(new Date());
-         iller.add(newIL);
-         return new ResponseEntity<>(newIL, HttpStatus.CREATED);
-
-     }
- */
     @GetMapping("/kurum")
     public ResponseEntity<List<Kurum>> getKurum() {
         List<Kurum> kurumList2 = new ArrayList<>();
@@ -177,6 +141,15 @@ public class DenemeController {
 
 
 return null;
+    }
+
+    @GetMapping("toplam")
+    public ResponseEntity<Integer> toplam()
+    {
+
+        List<ExceptionLog> exceptionLogList= jsonReader();
+
+        return new ResponseEntity<>(exceptionLogList.size(),HttpStatus.OK);
     }
 
     public List<ExceptionLog> jsonReader()
