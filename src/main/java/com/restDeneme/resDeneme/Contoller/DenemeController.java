@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -21,41 +22,41 @@ public class DenemeController {
 
     private static final List<IL> jsonint = new ArrayList<>();
 
-   /* public DenemeController() {
-        if (iller.isEmpty()) {
-            IL il1 = new IL(new Date(), "06", "Ankara");
-            IL il2 = new IL(new Date(), "34", "İstanbul");
+    /* public DenemeController() {
+         if (iller.isEmpty()) {
+             IL il1 = new IL(new Date(), "06", "Ankara");
+             IL il2 = new IL(new Date(), "34", "İstanbul");
 
-            iller.add(il1);
-            iller.add(il2);
-        }
-    }
-
-
-    @GetMapping
-    public ResponseEntity<List<IL>> getIller() {
+             iller.add(il1);
+             iller.add(il2);
+         }
+     }
 
 
-        return new ResponseEntity<>(iller, HttpStatus.OK);
+     @GetMapping
+     public ResponseEntity<List<IL>> getIller() {
 
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<IL> getIL(@PathVariable String id) {
-        IL result =
-                iller.stream().filter(il -> il.getId().
-                        equals(id)).findFirst().orElseThrow(() -> new RuntimeException("Bulunamadı"));
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+         return new ResponseEntity<>(iller, HttpStatus.OK);
 
-    @PostMapping
-    public ResponseEntity<IL> createIL(@RequestBody IL newIL) {
-        newIL.setCreateDate(new Date());
-        iller.add(newIL);
-        return new ResponseEntity<>(newIL, HttpStatus.CREATED);
+     }
 
-    }
-*/
+     @GetMapping("/{id}")
+     public ResponseEntity<IL> getIL(@PathVariable String id) {
+         IL result =
+                 iller.stream().filter(il -> il.getId().
+                         equals(id)).findFirst().orElseThrow(() -> new RuntimeException("Bulunamadı"));
+         return new ResponseEntity<>(result, HttpStatus.OK);
+     }
+
+     @PostMapping
+     public ResponseEntity<IL> createIL(@RequestBody IL newIL) {
+         newIL.setCreateDate(new Date());
+         iller.add(newIL);
+         return new ResponseEntity<>(newIL, HttpStatus.CREATED);
+
+     }
+ */
     @GetMapping("/kurum")
     public ResponseEntity<List<Kurum>> getKurum() {
         List<Kurum> kurumList2 = new ArrayList<>();
@@ -128,6 +129,7 @@ public class DenemeController {
 
         return new ResponseEntity<>(kurumList, HttpStatus.CREATED);
     }
+
     @PostMapping("/dummyVeriHataList/{sayi}")
     public void generateDummyHataList(@PathVariable int sayi) {
         List<ExceptionLog> hataList = new ArrayList<>();
@@ -135,7 +137,7 @@ public class DenemeController {
 
 
         for (int i = 0; i < sayi; i++) {
-            generateHata(hataList, faker,sayi);
+            generateHata(hataList, faker, sayi);
 
 
         }
@@ -150,22 +152,45 @@ public class DenemeController {
 
 
     @ResponseBody
-            @GetMapping(value = "/exceptionList/{sayi}")
-    public ResponseEntity<List<ExceptionLog>> getExceptionList(@PathVariable ("sayi")int sayi,@RequestBody IL bodyCount)
-    {
+    @GetMapping(value = "/exceptionList/{sayi}")
+    public ResponseEntity<List<ExceptionLog>> getExceptionList(@PathVariable("sayi") int sayi, @RequestBody IL bodyCount, HttpServletResponse response) {
+        response.addIntHeader("Total Count", sayi * bodyCount.getCount());
+        if (sayi != 1)
+            sayi = sayi + bodyCount.getCount();
 
+        List<ExceptionLog> exceptionLogList=   jsonReader();
+            List<ExceptionLog> arrlist = exceptionLogList.subList(sayi - 1, sayi + bodyCount.getCount() - 1);
+            return new ResponseEntity<>(arrlist, HttpStatus.OK);
+
+
+
+
+    }
+
+    @GetMapping("exceptionHata/{sayi}")
+    public ExceptionLog exceptionHata(@PathVariable int sayi) {
+
+     List<ExceptionLog> exceptionLogList=   jsonReader();
+            for (int i = 0; i < exceptionLogList.size(); i++)
+                if (exceptionLogList.get(i).getId() == sayi)
+                    return exceptionLogList.get(i);
+
+
+return null;
+    }
+
+    public List<ExceptionLog> jsonReader()
+    {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("exceptionList.json")) {
-int a=bodyCount.getCount();
+
+
             // Convert JSON File to Java Object
             Type listType = new TypeToken<List<ExceptionLog>>() {
             }.getType();
             List<ExceptionLog> exceptionLogList = gson.fromJson(reader, listType);
-            if(sayi!=1)
-                sayi=sayi+bodyCount.getCount();;
-            List<ExceptionLog> arrlist= exceptionLogList.subList(sayi-1,sayi+bodyCount.getCount()-1);
-            return new ResponseEntity<>(arrlist,HttpStatus.OK);
 
+            return exceptionLogList;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -189,9 +214,8 @@ int a=bodyCount.getCount();
 
         for (int i = 0; i < count; i++) {
 
-            String owner=getOwner(i);
-            for(int j=0;j<20;j++)
-            {
+            String owner = getOwner(i);
+            for (int j = 0; j < 20; j++) {
                 ExceptionLog hata = new ExceptionLog();
                 hata.setId(faker.number().randomNumber());
                 hata.setDate(faker.date().birthday());
@@ -207,7 +231,7 @@ int a=bodyCount.getCount();
             }
 
 
-       // getOwner(i);
+            // getOwner(i);
 
         }
 
@@ -227,6 +251,6 @@ int a=bodyCount.getCount();
         } catch (IOException e) {
             e.printStackTrace();
         }
-return null;
+        return null;
     }
 }
