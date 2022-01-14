@@ -1,7 +1,8 @@
-package com.restDeneme.resDeneme.model;
+package com.restDeneme.resDeneme.Service;
 
 import com.restDeneme.resDeneme.Repository.KurumRepository;
 import com.restDeneme.resDeneme.Service.KurumService;
+import com.restDeneme.resDeneme.model.Kurum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
