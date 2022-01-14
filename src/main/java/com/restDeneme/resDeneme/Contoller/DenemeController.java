@@ -156,7 +156,6 @@ public class DenemeController {
     private void generateKurum(List<Kurum> kurumList, Faker faker) {
         Kurum kurum = new Kurum();
         kurum.setKurumAdi(faker.company().name());
-        kurum.setId(faker.number().randomNumber());
         kurum.setLogo(faker.company().logo());
         kurum.setOwner(faker.company().catchPhrase());
         kurumList.add(kurum);

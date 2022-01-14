@@ -27,22 +27,22 @@ public class KurumServiceImp implements KurumService {
 
     // update operation
     @Override
-    public Kurum updateDepartment(Kurum department, Long departmentId) {
-        Kurum depDB = departmentRepository.findById(departmentId).get();
+    public Kurum updateDepartment(Kurum kurum, Long kurumId) {
+        Kurum kurDB = departmentRepository.findById(kurumId).get();
 
-        if (Objects.nonNull(department.getKurumAdi()) && !"".equalsIgnoreCase(department.getKurumAdi())) {
-            depDB.getKurumAdi();
+        if (Objects.nonNull(kurum.getKurumAdi()) && !"".equalsIgnoreCase(kurum.getKurumAdi())) {
+            kurDB.getKurumAdi();
         }
 
-        if (Objects.nonNull(department.getOwner()) && !"".equalsIgnoreCase(department.getOwner())) {
-            depDB.getOwner();
+        if (Objects.nonNull(kurum.getOwner()) && !"".equalsIgnoreCase(kurum.getOwner())) {
+            kurDB.getOwner();
         }
 
-        if (Objects.nonNull(department.getLogo()) && !"".equalsIgnoreCase(department.getLogo())) {
-            depDB.getLogo();
+        if (Objects.nonNull(kurum.getLogo()) && !"".equalsIgnoreCase(kurum.getLogo())) {
+            kurDB.getLogo();
         }
 
-        return departmentRepository.save(depDB);
+        return departmentRepository.save(kurDB);
     }
 
     // delete operation

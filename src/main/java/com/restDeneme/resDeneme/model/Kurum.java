@@ -2,24 +2,25 @@ package com.restDeneme.resDeneme.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Kurum {
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Getter
+    @Setter
     private String owner;
+    @Getter
+    @Setter
     private String kurumAdi;
+    @Getter
+    @Setter
     private String logo;
+
 
 
 }
