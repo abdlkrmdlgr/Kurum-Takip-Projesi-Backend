@@ -15,7 +15,7 @@ public class KurumController {
     private KurumService departmentService;
 
     // Save operation
-    @PostMapping("/departments")
+    @PostMapping("/departmants")
     public Kurum saveDepartment(
              @RequestBody Kurum department)
     {
