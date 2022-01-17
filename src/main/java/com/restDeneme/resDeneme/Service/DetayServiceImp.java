@@ -25,12 +25,17 @@ public class DetayServiceImp implements  DetayService{
 
     // read operation
     @Override
-    public List<Detay> fetchKullaniciList() {
+    public List<Detay> fetchDetayList() {
         return (List<Detay>) departmentRepository.findAll();
     }
 
-    // update operation
-    @Override
+
+    /**
+     * Update
+     * @param detay
+     * @param detayId
+     * @return
+     */
     public Detay updateDepartment(Detay detay, Long detayId) {
         Detay kurDB = departmentRepository.findById(detayId).get();
 

@@ -10,7 +10,7 @@ public interface Kurum_DetayService {
     Kurum_Detay saveDepartment(Kurum_Detay kurum_detay);
 
     // read operation
-    List<Kurum_Detay> fetchKullaniciList();
+    List<Kurum_Detay> fetchKurumDetayList();
 
     // update operation
     Kurum_Detay updateDepartment(Kurum_Detay kurum_detay, Long kurumlarId);

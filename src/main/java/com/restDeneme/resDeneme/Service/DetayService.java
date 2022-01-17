@@ -10,11 +10,12 @@ public interface DetayService {
     Detay saveDepartment(Detay detay);
 
     // read operation
-    List<Detay> fetchKullaniciList();
+    List<Detay> fetchDetayList();
 
     // update operation
     Detay updateDepartment(Detay detay, Long detayId);
 
     // delete operation
     void deleteDepartmentById(Long detayId);
+
 }

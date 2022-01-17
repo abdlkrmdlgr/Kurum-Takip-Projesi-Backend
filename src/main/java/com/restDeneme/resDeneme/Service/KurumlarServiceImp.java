@@ -1,8 +1,6 @@
 package com.restDeneme.resDeneme.Service;
 
-import com.restDeneme.resDeneme.Repository.KurumRepository;
 import com.restDeneme.resDeneme.Repository.KurumlarRepository;
-import com.restDeneme.resDeneme.model.Kurum;
 import com.restDeneme.resDeneme.model.Kurumlar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,24 +12,24 @@ import java.util.Objects;
 public class KurumlarServiceImp implements  KurumlarService{
 
     @Autowired
-    private KurumlarRepository departmentRepository;
+    private KurumlarRepository kurumlarRepository;
 
     // save operation
     @Override
     public Kurumlar saveDepartment(Kurumlar department) {
-        return departmentRepository.save(department);
+        return kurumlarRepository.save(department);
     }
 
     // read operation
     @Override
-    public List<Kurumlar> fetchDepartmentList() {
-        return (List<Kurumlar>) departmentRepository.findAll();
+    public List<Kurumlar> fetchKurumlarList() {
+        return (List<Kurumlar>) kurumlarRepository.findAll();
     }
 
     // update operation
     @Override
     public Kurumlar updateDepartment(Kurumlar kurum, Long kurumId) {
-        Kurumlar kurDB = departmentRepository.findById(kurumId).get();
+        Kurumlar kurDB = kurumlarRepository.findById(kurumId).get();
 
         if (Objects.nonNull(kurum.getKurum_adi()) && !"".equalsIgnoreCase(kurum.getKurum_adi())) {
             kurDB.getKurum_adi();
@@ -45,13 +43,13 @@ public class KurumlarServiceImp implements  KurumlarService{
             kurDB.getSurum();
         }
 
-        return departmentRepository.save(kurDB);
+        return kurumlarRepository.save(kurDB);
     }
 
     // delete operation
     @Override
     public void deleteDepartmentById(Long departmentId) {
-        departmentRepository.deleteById(departmentId);
+        kurumlarRepository.deleteById(departmentId);
     }
 
 }

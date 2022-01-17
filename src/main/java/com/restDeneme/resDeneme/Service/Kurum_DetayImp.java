@@ -24,7 +24,7 @@ public class Kurum_DetayImp implements Kurum_DetayService {
 
     // read operation
     @Override
-    public List<Kurum_Detay> fetchKullaniciList() {
+    public List<Kurum_Detay> fetchKurumDetayList() {
         return (List<Kurum_Detay>) departmentRepository.findAll();
     }
 

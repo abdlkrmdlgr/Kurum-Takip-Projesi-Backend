@@ -24,7 +24,7 @@ public class ErisimServiceImp implements ErisimService {
 
     // read operation
     @Override
-    public List<Erisim> fetchKullaniciList() {
+    public List<Erisim> fetchErisimList() {
         return (List<Erisim>) departmentRepository.findAll();
     }
 

@@ -9,7 +9,7 @@ public interface ErisimService {
     Erisim saveDepartment(Erisim kullanici);
 
     // read operation
-    List<Erisim> fetchKullaniciList();
+    List<Erisim> fetchErisimList();
 
     // update operation
     Erisim updateDepartment(Erisim erisim, Long erisimId);

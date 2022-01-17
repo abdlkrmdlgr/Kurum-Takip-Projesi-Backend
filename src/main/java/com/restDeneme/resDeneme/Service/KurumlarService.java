@@ -9,7 +9,7 @@ public interface KurumlarService {
     Kurumlar saveDepartment(Kurumlar department);
 
     // read operation
-    List<Kurumlar> fetchDepartmentList();
+    List<Kurumlar> fetchKurumlarList();
 
     // update operation
     Kurumlar updateDepartment(Kurumlar kurumlar, Long kurumlarId);
