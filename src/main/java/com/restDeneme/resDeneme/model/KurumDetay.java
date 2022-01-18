@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Kurum_Detay {
+public class KurumDetay {
 
     @Id
     @Getter

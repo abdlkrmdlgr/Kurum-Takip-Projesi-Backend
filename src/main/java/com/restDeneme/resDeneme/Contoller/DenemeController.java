@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.restDeneme.resDeneme.model.ExceptionLog;
-import com.restDeneme.resDeneme.model.IL;
-import com.restDeneme.resDeneme.model.Kurum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +18,10 @@ import java.util.*;
 @RequestMapping("/mert")
 public class DenemeController {
 
-
+/*
     @GetMapping("/kurum")
-    public ResponseEntity<List<Kurum>> getKurum() {
-        List<Kurum> kurumList2 = new ArrayList<>();
+    public ResponseEntity<List<KurumDeneme>> getKurum() {
+        List<KurumDeneme> kurumList2 = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
         generateKurum(kurumList2, faker);
 
@@ -31,8 +29,8 @@ public class DenemeController {
     }
 
     @GetMapping("/kurumList")
-    public ResponseEntity<List<Kurum>> getKurumList() {
-        List<Kurum> kurumList = new ArrayList<>();
+    public ResponseEntity<List<KurumDeneme>> getKurumList() {
+        List<KurumDeneme> kurumList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
         kurumList.clear();
@@ -67,8 +65,8 @@ public class DenemeController {
     }
 
     @PostMapping("/dummyveri/{sayi}")
-    public ResponseEntity<List<Kurum>> getDummy(@PathVariable Long sayi) {
-        List<Kurum> kurumList = new ArrayList<>();
+    public ResponseEntity<List<KurumDeneme>> getDummy(@PathVariable Long sayi) {
+        List<KurumDeneme> kurumList = new ArrayList<>();
         Faker faker = new Faker(new Locale("tr-TR"));
 
         for (int i = 0; i < sayi; i++) {
@@ -153,8 +151,8 @@ public class DenemeController {
         return null;
     }
 
-    private void generateKurum(List<Kurum> kurumList, Faker faker) {
-        Kurum kurum = new Kurum();
+    private void generateKurum(List<KurumDeneme> kurumList, Faker faker) {
+        KurumDeneme kurum = new KurumDeneme();
         kurum.setKurumAdi(faker.company().name());
         kurum.setLogo(faker.company().logo());
         kurum.setOwner(faker.company().catchPhrase());
@@ -201,4 +199,6 @@ public class DenemeController {
         }
         return null;
     }
+
+ */
 }

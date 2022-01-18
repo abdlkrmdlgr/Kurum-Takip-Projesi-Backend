@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Locale;
 
 public class RandomData {
-    @RestController
+   /* @RestController
     @RequestMapping("/random")
     public class RandomDataEndpoint {
 
@@ -40,5 +40,5 @@ public class RandomData {
         }
     }
 
-
+*/
 }
