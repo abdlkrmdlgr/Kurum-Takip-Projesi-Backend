@@ -22,8 +22,11 @@ public class KurumVeriImp implements KurumVeriService {
 
     // read operation
     @Override
-    public List<KurumVeriTablosu> fetchKullaniciList() {
-        return (List<KurumVeriTablosu>) kurum_veri_Repository.findAll();
+    public List<KurumVeriTablosu> fetchKullaniciList(Long detayid,Long kurumid) {
+
+
+                return kurum_veri_Repository.findkurumdetayid(detayid,kurumid);
+
     }
 
     // update operation

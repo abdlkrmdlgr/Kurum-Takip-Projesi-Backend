@@ -22,8 +22,9 @@ public class KurumServiceImp implements KurumService {
 
     // read operation
     @Override
-    public List<Kurum> fetchKurumList() {
-        return (List<Kurum>) kurumRepository.findAll();
+    public List<Kurum> fetchKurumList(Long id) {
+
+        return kurumRepository.findByIdAndAnd(id);
     }
 
     // update operation

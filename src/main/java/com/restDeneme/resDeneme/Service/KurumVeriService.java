@@ -9,7 +9,7 @@ public interface KurumVeriService {
     KurumVeriTablosu saveDepartment(KurumVeriTablosu kurum_veri_tablosu);
 
     // read operation
-    List<KurumVeriTablosu> fetchKullaniciList();
+    List<KurumVeriTablosu> fetchKullaniciList(Long detayid,Long kurumid);
 
     // update operation
     KurumVeriTablosu updateDepartment(KurumVeriTablosu kurum_veri_tablosu, Long kurumlarId);

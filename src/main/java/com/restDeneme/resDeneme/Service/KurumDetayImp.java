@@ -12,24 +12,27 @@ import java.util.Objects;
 public class KurumDetayImp implements KurumDetayService {
 
     @Autowired
-    private KurumDetayRepository departmentRepository;
+    private KurumDetayRepository kurumDetayRepository;
 
     // save operation
     @Override
     public KurumDetay saveDepartment(KurumDetay kurum_detay) {
-        return departmentRepository.save(kurum_detay);
+        return kurumDetayRepository.save(kurum_detay);
     }
 
     // read operation
     @Override
-    public List<KurumDetay> fetchKurumDetayList() {
-        return (List<KurumDetay>) departmentRepository.findAll();
+    public List<KurumDetay> fetchKurumDetayList(Long kurumid, Long detayid) {
+
+
+      return kurumDetayRepository.findByFirstName(detayid,kurumid);
+
     }
 
     // update operation
     @Override
     public KurumDetay updateDepartment(KurumDetay kurum_detay, Long kullaniciId) {
-        KurumDetay kurDB = departmentRepository.findById(kullaniciId).get();
+        KurumDetay kurDB = kurumDetayRepository.findById(kullaniciId).get();
 
         if (Objects.nonNull(kurum_detay.getKurum_id()) && !"".equalsIgnoreCase(String.valueOf(kurum_detay.getKurum_id()))) {
             kurDB.getKurum_id();
@@ -48,12 +51,12 @@ public class KurumDetayImp implements KurumDetayService {
 
 
 
-        return departmentRepository.save(kurDB);
+        return kurumDetayRepository.save(kurDB);
     }
 
     // delete operation
     @Override
     public void deleteDepartmentById(Long departmentId) {
-        departmentRepository.deleteById(departmentId);
+        kurumDetayRepository.deleteById(departmentId);
     }
 }

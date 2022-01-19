@@ -5,7 +5,9 @@ import com.restDeneme.resDeneme.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -17,10 +19,10 @@ public class ApiController {
     private KurumVeriService kurumVeriService;
     @Autowired
     private KurumDetayService kurumDetayService;
-  /*  @Autowired
-    private KullaniciService kullaniciService;
+  /*  private KullaniciService kullaniciService;
     @Autowired
-    private ErisimService erisimService;*/
+    private ErisimService erisimService;
+    */
 
     @Autowired
     private DetayService detayService;
@@ -31,31 +33,38 @@ public class ApiController {
      * Pynin sorumlu olduğu kurumları getirecek. Bu amaçla erişim tablosu kullanılmalı
      * @return
      */
-    @GetMapping("/kurumlar")
-    public List<Kurum> fetchKurumList() {
+    @GetMapping("/kurumlar/{id}")
+    public List<Kurum> fetchKurumList(@PathVariable Long id) {
 
-        return kurumService.fetchKurumList();
+        return kurumService.fetchKurumList(id);
     }
 
-/**
+
+    /**
  *
  * Parametre olarak detayid ve kurumid alır.
  *
  */
-    @GetMapping("/kurum_veri")
-    public List<KurumVeriTablosu> fetchKurumVeriList() {
 
-        return kurumVeriService.fetchKullaniciList();
+
+    @GetMapping("/kurum_veri/{detayid}/{kurumid}")
+    public List<KurumVeriTablosu> fetchKurumVeriList(@PathVariable Long detayid,@PathVariable Long kurumid)
+    {
+        return kurumVeriService.fetchKullaniciList(detayid,kurumid);
+
     }
 
     /**
      * Parametre olarak kurumid ve detayid alır.
      * @return
      */
-    @GetMapping("/kurum_detay")
-    public List<KurumDetay> fetchKurumDetayList() {
+    @GetMapping("/kurum_detay/{kurumid}/{detayid}")
+    public List<KurumDetay> fetchKurumDetayList(@PathVariable Long kurumid, @PathVariable Long detayid) {
 
-        return kurumDetayService.fetchKurumDetayList();
+
+
+        return kurumDetayService.fetchKurumDetayList(kurumid,detayid);
+
     }
 
 
