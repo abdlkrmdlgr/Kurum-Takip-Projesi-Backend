@@ -9,6 +9,7 @@ import java.util.List;
 public interface KurumDetayRepository extends CrudRepository<KurumDetay,Long> {
 
     @Query("FROM KurumDetay WHERE detey_id = ?1 AND kurum_id = ?2" )
-    List<KurumDetay> findByFirstName(Long detayid, Long kurumid );
+
+    List<KurumDetay> findKurumDetayBy(Long detayid, Long kurumid );
 
 }

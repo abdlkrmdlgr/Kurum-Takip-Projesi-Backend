@@ -1,14 +1,13 @@
 package com.restDeneme.resDeneme.Repository;
 
-import com.restDeneme.resDeneme.model.KurumDetay;
-import com.restDeneme.resDeneme.model.KurumVeriTablosu;
+import com.restDeneme.resDeneme.model.KurumVeri;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface KurumVeriRepository extends CrudRepository<KurumVeriTablosu,Long> {
+public interface KurumVeriRepository extends CrudRepository<KurumVeri,Long> {
 
-    @Query("FROM KurumVeriTablosu WHERE detay_id = ?1 AND kurum_id = ?2" )
-    List<KurumVeriTablosu> findkurumdetayid(Long detayid, Long kurumid );
+    @Query("FROM KurumVeri WHERE detay_id = ?1 AND kurum_id = ?2" )
+    List<KurumVeri> findKurumVeriBy(Long detayid, Long kurumid );
 }

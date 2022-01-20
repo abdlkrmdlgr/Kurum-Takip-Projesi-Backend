@@ -9,8 +9,7 @@ import java.util.List;
 public interface KurumRepository extends CrudRepository<Kurum,Long> {
 
 
-   @Query(" FROM Kurum a join Erisim b on  a.id=b.kurum_id where b.kullanici_id=?1")
-
-    List<Kurum> findByIdAndAnd(Long id);
+   @Query(" FROM Kurum k join Erisim e on  k.id=e.kurum_id where e.kullanici_id=?1")
+   List<Kurum> findKurumWithErisimById(Long kullaniciId);
 
 }

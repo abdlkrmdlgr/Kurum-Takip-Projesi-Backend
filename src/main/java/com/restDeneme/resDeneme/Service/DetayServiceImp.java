@@ -6,52 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class DetayServiceImp implements  DetayService{
 
 
     @Autowired
-    private DetayRepository departmentRepository;
-
-    // save operation
-    @Override
-    public Detay saveDepartment(Detay detay) {
-        return departmentRepository.save(detay);
-    }
-
+    private DetayRepository detayRepository;
     // read operation
     @Override
     public List<Detay> fetchDetayList() {
-        return (List<Detay>) departmentRepository.findAll();
+
+        return (List<Detay>) detayRepository.findAll();
     }
 
 
-    /**
-     * Update
-     * @param detay
-     * @param detayId
-     * @return
-     */
-    public Detay updateDepartment(Detay detay, Long detayId) {
-        Detay kurDB = departmentRepository.findById(detayId).get();
-
-        if (Objects.nonNull(detay.getAdi()) && !"".equalsIgnoreCase(String.valueOf(detay.getAdi()))) {
-            kurDB.getAdi();
-        }
-
-
-
-
-
-        return departmentRepository.save(kurDB);
-    }
-
-    // delete operation
-    @Override
-    public void deleteDepartmentById(Long departmentId) {
-        departmentRepository.deleteById(departmentId);
-    }
 
 }

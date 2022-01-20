@@ -5,9 +5,7 @@ import com.restDeneme.resDeneme.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -48,9 +46,9 @@ public class ApiController {
 
 
     @GetMapping("/kurum_veri/{detayid}/{kurumid}")
-    public List<KurumVeriTablosu> fetchKurumVeriList(@PathVariable Long detayid,@PathVariable Long kurumid)
+    public List<KurumVeri> fetchKurumVeriList(@PathVariable Long detayid, @PathVariable Long kurumid)
     {
-        return kurumVeriService.fetchKullaniciList(detayid,kurumid);
+        return kurumVeriService.fetchKurumVeriList(detayid,kurumid);
 
     }
 

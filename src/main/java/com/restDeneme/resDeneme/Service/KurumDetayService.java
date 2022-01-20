@@ -7,14 +7,7 @@ import java.util.List;
 
 public interface KurumDetayService {
 
-    KurumDetay saveDepartment(KurumDetay kurum_detay);
-
     // read operation
     List<KurumDetay> fetchKurumDetayList(Long kurumid, Long detayid);
 
-    // update operation
-    KurumDetay updateDepartment(KurumDetay kurum_detay, Long kurumlarId);
-
-    // delete operation
-    void deleteDepartmentById(Long kurumlarId);
 }
