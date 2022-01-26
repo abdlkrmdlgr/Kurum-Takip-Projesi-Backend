@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface KullaniciService {
 
-    // read operation
-    List<Kullanici> fetchKullaniciList();
 
+    Kullanici findUserNameAndPassword(String username, String password);
 }

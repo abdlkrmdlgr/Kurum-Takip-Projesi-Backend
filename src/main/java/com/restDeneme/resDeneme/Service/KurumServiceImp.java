@@ -15,43 +15,15 @@ public class KurumServiceImp implements KurumService {
     private KurumRepository kurumRepository;
 
     // save operation
-    @Override
-    public Kurum saveKurumlar(Kurum department) {
-        return kurumRepository.save(department);
-    }
+
 
     // read operation
     @Override
-    public List<Kurum> fetchKurumList(Long id) {
+    public List<Kurum> fetchKurumList() {
 
-
-        return kurumRepository.findKurumWithErisimById(id);
+        Long kullaniciId = 0L; //TODO; baseService'ten get auth user çekilecek ve ilgili yerlerde atamaları yapılacak
+        return kurumRepository.findKurumWithErisimById(kullaniciId);
     }
 
-    // update operation
-    @Override
-    public Kurum updateDepartment(Kurum kurum, Long kurumId) {
-        Kurum kurDB = kurumRepository.findById(kurumId).get();
-
-        if (Objects.nonNull(kurum.getKurum_adi()) && !"".equalsIgnoreCase(kurum.getKurum_adi())) {
-            kurDB.getKurum_adi();
-        }
-
-        if (Objects.nonNull(kurum.getLogo()) && !"".equalsIgnoreCase(kurum.getLogo())) {
-            kurDB.getLogo();
-        }
-
-        if (Objects.nonNull(kurum.getSurum()) && !"".equalsIgnoreCase(kurum.getSurum())) {
-            kurDB.getSurum();
-        }
-
-        return kurumRepository.save(kurDB);
-    }
-
-    // delete operation
-    @Override
-    public void deleteDepartmentById(Long departmentId) {
-        kurumRepository.deleteById(departmentId);
-    }
 
 }

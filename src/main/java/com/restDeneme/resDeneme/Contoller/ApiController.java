@@ -3,13 +3,20 @@ package com.restDeneme.resDeneme.Contoller;
 import com.restDeneme.resDeneme.Service.*;
 import com.restDeneme.resDeneme.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
+
 
     @Autowired
     private KurumService kurumService;
@@ -31,10 +38,10 @@ public class ApiController {
      * Pynin sorumlu olduğu kurumları getirecek. Bu amaçla erişim tablosu kullanılmalı
      * @return
      */
-    @GetMapping("/kurumlar/{id}")
-    public List<Kurum> fetchKurumList(@PathVariable Long id) {
+    @GetMapping("/kurumlar")
+    public List<Kurum> fetchKurumList() {
 
-        return kurumService.fetchKurumList(id);
+        return kurumService.fetchKurumList();
     }
 
 

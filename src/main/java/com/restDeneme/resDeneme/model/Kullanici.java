@@ -1,8 +1,11 @@
 package com.restDeneme.resDeneme.model;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
@@ -18,5 +21,6 @@ public class Kullanici {
     @Getter
     @Setter
     private String kullanici_parola;
+
 
 }
