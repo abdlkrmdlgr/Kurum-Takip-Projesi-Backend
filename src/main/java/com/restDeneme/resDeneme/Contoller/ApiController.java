@@ -1,16 +1,11 @@
 package com.restDeneme.resDeneme.Contoller;
 
 import com.restDeneme.resDeneme.Service.*;
+import com.restDeneme.resDeneme.dto.KurumDetayDTO;
 import com.restDeneme.resDeneme.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @RestController
@@ -40,7 +35,6 @@ public class ApiController {
      */
     @GetMapping("/kurumlar")
     public List<Kurum> fetchKurumList() {
-
         return kurumService.fetchKurumList();
     }
 
@@ -63,19 +57,14 @@ public class ApiController {
      * Parametre olarak kurumid ve detayid alır.
      * @return
      */
-    @GetMapping("/kurum_detay/{kurumid}/{detayid}")
-    public List<KurumDetay> fetchKurumDetayList(@PathVariable Long kurumid, @PathVariable Long detayid) {
-
-
-
-        return kurumDetayService.fetchKurumDetayList(kurumid,detayid);
-
+    @GetMapping("/kurum_detay/{kurumId}")
+    public List<KurumDetayDTO> fetchKurumDetayList(@PathVariable Long kurumId) {
+        return kurumDetayService.fetchKurumDetayList(kurumId);
     }
 
 
     @GetMapping("/detay")
     public List<Detay> fetchDetayList() {
-
         return detayService.fetchDetayList();
     }
 

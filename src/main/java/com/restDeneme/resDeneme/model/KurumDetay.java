@@ -3,10 +3,7 @@ package com.restDeneme.resDeneme.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class KurumDetay {
@@ -20,12 +17,11 @@ public class KurumDetay {
     private Long kurum_id;
     @Getter
     @Setter
-    private  Long detey_id;
+    private  Long detay_id;
     @Getter
     @Setter
-    private String ilk_kirilim;
+    private Long ilk_kirilim;
     @Getter
     @Setter
-    private String ikinci_kirilim;
-
+    private Long ikinci_kirilim;
 }

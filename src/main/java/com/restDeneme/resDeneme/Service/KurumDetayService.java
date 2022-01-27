@@ -1,13 +1,12 @@
 package com.restDeneme.resDeneme.Service;
 
-import com.restDeneme.resDeneme.model.KurumDetay;
-
+import com.restDeneme.resDeneme.dto.KurumDetayDTO;
 
 import java.util.List;
 
 public interface KurumDetayService {
 
     // read operation
-    List<KurumDetay> fetchKurumDetayList(Long kurumid, Long detayid);
+    List<KurumDetayDTO> fetchKurumDetayList(Long kurumId);
 
 }

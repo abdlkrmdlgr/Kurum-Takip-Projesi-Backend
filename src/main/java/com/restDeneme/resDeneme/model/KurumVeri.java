@@ -23,7 +23,7 @@ public class KurumVeri {
     private Long detay_id;
     @Getter
     @Setter
-    private String kurum_verisi;
+    private Long kurum_verisi;
     @Getter
     @Setter
     private Date tarih;

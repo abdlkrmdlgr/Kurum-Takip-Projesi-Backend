@@ -1,26 +1,26 @@
 package com.restDeneme.resDeneme.Service;
 
 import com.restDeneme.resDeneme.Repository.KurumDetayRepository;
-import com.restDeneme.resDeneme.model.Kullanici;
-import com.restDeneme.resDeneme.model.KurumDetay;
+import com.restDeneme.resDeneme.dto.KurumDetayDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class KurumDetayImp implements KurumDetayService {
+public class KurumDetayImp extends BaseService implements KurumDetayService {
 
     @Autowired
     private KurumDetayRepository kurumDetayRepository;
 
     // read operation
     @Override
-    public List<KurumDetay> fetchKurumDetayList(Long kurumid, Long detayid) {
+    public List<KurumDetayDTO> fetchKurumDetayList(Long kurumId) {
         //Long kullaniciId =  ((Kullanici) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         //TODO: bu servise herhangi bir şekilde kendisine ait olmayan kurumun detay bilgilerine ulaşılması açığı kapatılacak
-        return kurumDetayRepository.findKurumDetayBy(detayid,kurumid);
+
+       // getKullaniciId().
+        return kurumDetayRepository.findKurumDetayListBy(getAuthUser().getId(),kurumId);
 
     }
 

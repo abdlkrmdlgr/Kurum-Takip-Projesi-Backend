@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DetayServiceImp implements  DetayService{
+public class DetayServiceImp extends BaseService implements  DetayService{
 
 
     @Autowired

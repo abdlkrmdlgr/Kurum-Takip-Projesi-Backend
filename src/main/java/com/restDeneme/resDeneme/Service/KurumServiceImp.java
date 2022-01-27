@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
-public class KurumServiceImp implements KurumService {
+public class KurumServiceImp extends BaseService implements KurumService {
 
     @Autowired
     private KurumRepository kurumRepository;
@@ -20,9 +19,9 @@ public class KurumServiceImp implements KurumService {
     // read operation
     @Override
     public List<Kurum> fetchKurumList() {
+      //  Long kullaniciId = 0L; //TODO; baseService'ten get auth user çekilecek ve ilgili yerlerde atamaları yapılacak
 
-        Long kullaniciId = 0L; //TODO; baseService'ten get auth user çekilecek ve ilgili yerlerde atamaları yapılacak
-        return kurumRepository.findKurumWithErisimById(kullaniciId);
+        return kurumRepository.findKurumWithErisimById(getAuthUser().getId());
     }
 
 
