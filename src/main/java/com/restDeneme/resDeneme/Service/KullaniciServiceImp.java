@@ -5,8 +5,10 @@ import com.restDeneme.resDeneme.model.Kullanici;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
+
 @Service
-public class KullaniciServiceImp implements KullaniciService {
+public class KullaniciServiceImp extends BaseService implements KullaniciService {
 
     @Autowired
     private KullaniciRepository kullaniciRepository;
@@ -17,5 +19,11 @@ public class KullaniciServiceImp implements KullaniciService {
 
         return kullaniciRepository.findKullaniciAndPassword(username,password);
 
+    }
+
+
+    @Override
+    public String getBasicAuthString() {
+        return Base64.getEncoder().encodeToString((getAuthUser().getKullanici_adi()+":"+ getAuthUser().getKullanici_parola()).getBytes());
     }
 }

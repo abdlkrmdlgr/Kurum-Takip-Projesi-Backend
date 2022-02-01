@@ -6,4 +6,6 @@ public interface KullaniciService {
 
 
     Kullanici findUserNameAndPassword(String username, String password);
+
+    String getBasicAuthString();
 }

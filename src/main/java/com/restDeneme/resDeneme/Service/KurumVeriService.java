@@ -9,5 +9,7 @@ public interface KurumVeriService {
     // read operation
     List<KurumVeri> fetchKurumVeriList(Long detayid, Long kurumid);
 
+    //sum kurum detay
+    Long sumKurumDetayVeri(Long kurumId);
 
 }

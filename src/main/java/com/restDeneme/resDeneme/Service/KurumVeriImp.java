@@ -16,9 +16,13 @@ public class KurumVeriImp implements KurumVeriService {
     // read operation
     @Override
     public List<KurumVeri> fetchKurumVeriList(Long detayid, Long kurumid) {
-
         return kurumVeriRepository.findKurumVeriBy(detayid,kurumid);
-
     }
+
+    @Override
+    public Long sumKurumDetayVeri(Long kurumId) {
+        return  kurumVeriRepository.sumKurumDetayVerisiBy(kurumId);
+    }
+
 
 }

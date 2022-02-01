@@ -24,4 +24,10 @@ public class KurumDetayImp extends BaseService implements KurumDetayService {
 
     }
 
+    @Override
+    public Long sumKurumEsikVerileri(Long kurumId){
+        return kurumDetayRepository.sumKurumEsikVerileriBy(kurumId);
+    }
+
+
 }

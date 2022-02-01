@@ -14,4 +14,7 @@ public interface KurumDetayRepository extends CrudRepository<KurumDetay,Long> {
             "where kd.detay_id = d.id and kd.kurum_id=e.kurum_id and d.id=kv.detay_id and kv.kurum_id = :kurumId and e.kullanici_id = :kullaniciId and e.kurum_id=:kurumId")
     List<KurumDetayDTO> findKurumDetayListBy(Long kullaniciId , Long kurumId);
 
+
+    @Query("select sum(ilk_kirilim)as toplam from KurumDetay where kurum_id=:kurumId")
+    Long sumKurumEsikVerileriBy(Long kurumId);
 }
