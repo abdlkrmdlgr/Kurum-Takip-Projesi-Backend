@@ -12,4 +12,6 @@ public interface KurumDetayService {
 
     public Long sumKurumEsikVerileri(Long kurumId);
 
+    public Long sumKurumEsikIkinciVerileri(Long kurumId);
+
 }

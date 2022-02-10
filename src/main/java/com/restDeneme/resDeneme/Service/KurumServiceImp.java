@@ -24,5 +24,10 @@ public class KurumServiceImp extends BaseService implements KurumService {
         return kurumRepository.findKurumWithErisimById(getAuthUser().getId());
     }
 
+    @Override
+    public Kurum getKurumBy(Long kurumId) {
+        return  kurumRepository.findById(kurumId).get();
+    }
+
 
 }

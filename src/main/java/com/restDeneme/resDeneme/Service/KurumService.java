@@ -13,4 +13,6 @@ public interface KurumService {
     List<Kurum> fetchKurumList();
 
 
+    Kurum getKurumBy(Long kurumId);
+
 }

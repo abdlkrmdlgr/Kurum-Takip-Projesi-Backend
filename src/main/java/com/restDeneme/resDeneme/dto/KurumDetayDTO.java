@@ -27,11 +27,11 @@ public class KurumDetayDTO {
         this.kurumVeri = kurumVeri;
         this.kurumVeriTarih = kurumVeriTarih;
         if (kurumVeri <= ilkKirilim) {
-            this.status = "YESIL";
+            this.status = "success";
         } else if (kurumVeri <= ikinciKirilim) {
-            this.status = "SARI";
+            this.status = "warning";
         } else {
-            this.status = "KIRMIZI";
+            this.status = "danger";
         }
     }
 }
