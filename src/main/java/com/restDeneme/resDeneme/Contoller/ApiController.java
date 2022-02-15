@@ -3,10 +3,13 @@ package com.restDeneme.resDeneme.Contoller;
 import com.restDeneme.resDeneme.Service.*;
 import com.restDeneme.resDeneme.dto.KurumDetayDTO;
 import com.restDeneme.resDeneme.model.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@Api(value = "Post API Dökümantasyonu")
 public class ApiController implements WebMvcConfigurer {
 
 
@@ -40,8 +44,9 @@ public class ApiController implements WebMvcConfigurer {
      * Pynin sorumlu olduğu kurumları getirecek. Bu amaçla erişim tablosu kullanılmalı
      * @return
      */
-    @GetMapping("/login")
-    public String login() {
+    @GetMapping("/getBasicAuthString")
+    @ApiOperation(value="Post listesi döner")
+    public String getBasicAuthString() {
        return kullaniciService.getBasicAuthString();
     }
 

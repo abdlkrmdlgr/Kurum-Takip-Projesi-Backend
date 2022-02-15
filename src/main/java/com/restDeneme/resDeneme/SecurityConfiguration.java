@@ -32,7 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception
     {
         http.cors().configurationSource(corsConfigurationSource());
-        http.csrf().disable().httpBasic().and().authorizeRequests().anyRequest().authenticated();
+        http.csrf().disable().httpBasic().and().authorizeRequests(). antMatchers(
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/configuration/ui",
+            "/swagger-resources/configuration/security")
+            .permitAll().anyRequest().authenticated();
     }
 
 
